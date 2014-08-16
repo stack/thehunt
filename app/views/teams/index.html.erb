@@ -1,0 +1,32 @@
+<% title 'Teams' %>
+
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Code</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% if @teams.empty? %>
+      <tr>
+        <td colspan="3" class="empty">There are no teams, yet.</td>
+      </tr>
+    <% else %>
+      <% @teams.each do |team| %>
+        <tr>
+          <td><%= link_to team.name, team_path(team) %></td>
+          <td><%= team.code %></td>
+          <td>
+            <!-- Controls Go Here -->
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3"><%= link_to "+ Create a new team", new_team_path %></td>
+    </tr>
+  </tfoot>
+</table>
+

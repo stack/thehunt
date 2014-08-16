@@ -1,0 +1,48 @@
+<% title "Team #{@team.name}" %>
+
+<%= form_for(@team) do |f| %>
+  <% if @team.errors.any? %>
+    <div class="notice notice-error">
+      <%= @team.errors.full_messages.join ', ' %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :code %>
+    <%= f.text_field :code %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @team.people.count == 0 %>
+      <tr>
+        <td colspan="3">There are no people, yet.</td>
+      </tr>
+    <% else %>
+      <% @team.people.each do |person| %>
+        <tr>
+          <td><%= person.name %></td>
+          <td><%= person.number %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+

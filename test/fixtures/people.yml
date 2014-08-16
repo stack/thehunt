@@ -1,0 +1,6 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+joe:
+  number: +15551234567
+  name: Joe Schmoe
+

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield(:title) %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <h1><%= yield(:title) %></h1>
+
+  <% flash.each do |name, message| %>
+    <div class="flash-<%= name %>">
+      <span><%= message %></span>
+    </div>
+  <% end %>
+
+  <%= yield %>
+
+</body>
+</html>
