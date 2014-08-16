@@ -2,6 +2,12 @@ Rails.application.routes.draw do
 
   post 'messages/create'
 
+  resources :checkpoints do
+    collection do
+      post 'sort'
+    end
+  end
+
   resources :teams
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,34 @@
+<% title 'Checkpoints' %>
+
+<% if @checkpoints.empty? %>
+  <div class="flash-info">
+    <span>There are no checkpoints, yet.</span>
+  </div>
+<% end %>
+
+<div id="checkpoints" class="sortable" data-url="<%= sort_checkpoints_url %>">
+  <% @checkpoints.each do |checkpoint| %>
+    <div class="checkpoint item" id="checkpoint-<%= checkpoint.id %>" data-item-id="<%= checkpoint.id %>">
+      <div class="message">
+        <%= link_to checkpoint.message, checkpoint_path(checkpoint) %>
+      </div>
+
+      <% if checkpoint.points > 0 %>
+        <div class="points">
+          <%= pluralize(checkpoint.points, 'points') %>
+        </div>
+      <% end %>
+
+      <p>
+        <% unless checkpoint.success.empty? %>
+          <span class="success"><%= checkpoint.success %></span>
+        <% end %>
+        <span class="response"><%= checkpoint.response %></span>
+      </p>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to 'Create a checkpoint', new_checkpoint_path, :class => 'button' %>
+<button class="toggle-sort" data-state="disabled">Sort</button>
+

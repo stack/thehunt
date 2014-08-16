@@ -33,7 +33,7 @@
   <tbody>
     <% if @team.people.count == 0 %>
       <tr>
-        <td colspan="3">There are no people, yet.</td>
+        <td colspan="3" class="empty">There are no people, yet.</td>
       </tr>
     <% else %>
       <% @team.people.each do |person| %>

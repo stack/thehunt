@@ -1,0 +1,34 @@
+<% title "Checkpoint #{@checkpoint.message}" %>
+
+<%= form_for(@checkpoint) do |f| %>
+  <% if @checkpoint.errors.any? %>
+    <div class="notice notice-error">
+      <%= @checkpoint.errors.full_messages.join '. ' %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :message %>
+    <%= f.text_field :message %>
+  </div>
+
+  <div class="field">
+    <%= f.label :success %>
+    <%= f.text_field :success %>
+  </div>
+
+  <div class="field">
+    <%= f.label :response %>
+    <%= f.text_field :response %>
+  </div>
+
+  <div class="field">
+    <%= f.label :points %>
+    <%= f.number_field :points, min: 0, step: 1 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+

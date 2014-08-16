@@ -8,7 +8,23 @@
 </head>
 <body>
 
-  <h1><%= yield(:title) %></h1>
+  <header class="navigation">
+    <div class="navigation-wrapper">
+      <a href="javascript:void(0)" class="logo">
+        <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="">
+      </a>
+      <a href="" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+      <div class="nav">
+        <ul id="navigation-menu">
+          <li class="nav-link"><%= link_to 'Teams', teams_path %></li>
+          <li class="nav-link"><%= link_to 'Checkpoints', checkpoints_path %></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  <h1 id="title"><%= yield(:title) %></h1>
 
   <% flash.each do |name, message| %>
     <div class="flash-<%= name %>">

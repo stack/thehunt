@@ -45,3 +45,6 @@ gem 'neat'
 # Twilio
 gem 'twilio-ruby'
 
+# jQuery UI
+gem 'jquery-ui-rails'
+

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  message: one
+  response: Go to the place
+  points: 0
+  order: 1
+
+two:
+  message: two
+  success: 5 Points!
+  response: Try looking over here
+  points: 5
+  order: 2
+

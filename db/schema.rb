@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815013618) do
+ActiveRecord::Schema.define(version: 20140816132534) do
+
+  create_table "checkpoints", force: true do |t|
+    t.string   "message"
+    t.text     "success"
+    t.text     "response"
+    t.integer  "points",     default: 0
+    t.integer  "order"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "checkpoints", ["message"], name: "index_checkpoints_on_message", unique: true
 
   create_table "people", force: true do |t|
     t.string   "number"

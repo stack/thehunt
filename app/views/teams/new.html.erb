@@ -3,7 +3,7 @@
 <%= form_for(@team) do |f| %>
   <% if @team.errors.any? %>
     <div class="notice notice-error">
-      <%= @team.errors.full_messages.join ', ' %>
+      <%= @team.errors.full_messages.join '. ' %>
     </div>
   <% end %>
 
