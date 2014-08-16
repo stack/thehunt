@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class DashboardController < SecuredController
 
   def index
     @teams = Team.order :name

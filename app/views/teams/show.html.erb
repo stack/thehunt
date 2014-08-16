@@ -20,30 +20,30 @@
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Number</th>
-      <th>Name</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% if @team.people.count == 0 %>
+  <table>
+    <thead>
       <tr>
-        <td colspan="3" class="empty">There are no people, yet.</td>
+        <th>Number</th>
+        <th>Name</th>
+        <th></th>
       </tr>
-    <% else %>
-      <% @team.people.each do |person| %>
+    </thead>
+    <tbody>
+      <% if @team.people.count == 0 %>
         <tr>
-          <td><%= person.number %></td>
-          <td><%= person.name %></td>
-          <td></td>
+          <td colspan="3" class="empty">There are no people, yet.</td>
         </tr>
+      <% else %>
+        <%= f.fields_for :people do |fp| %>
+          <tr>
+            <td><%= fp.object.number %></td>
+            <td><%= fp.text_field :name %></td>
+            <td></td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+<% end %>
 

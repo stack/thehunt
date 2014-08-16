@@ -7,6 +7,8 @@ class Team < ActiveRecord::Base
   validates :name, presence: true
   validates :position, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  accepts_nested_attributes_for :people
+
   def started?
     self.position != 0
   end

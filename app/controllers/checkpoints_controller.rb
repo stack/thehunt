@@ -1,4 +1,4 @@
-class CheckpointsController < ApplicationController
+class CheckpointsController < SecuredController
 
   def create
     @checkpoint = Checkpoint.new checkpoint_params

@@ -1,4 +1,4 @@
-class TeamsController < ApplicationController
+class TeamsController < SecuredController
 
   def create
     @team = Team.new team_params
@@ -50,7 +50,7 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:code, :name)
+    params.require(:team).permit(:code, :name, people_attributes: [ :id, :name ])
   end
 
 end
