@@ -8,7 +8,7 @@ one:
 
 two:
   message: two
-  success: 5 Points!
+  success: '5 Points!'
   response: Try looking over here
   points: 5
   order: 2

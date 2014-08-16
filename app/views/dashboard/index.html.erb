@@ -1,0 +1,43 @@
+<% title 'Dashboard' %>
+
+<section id="dashboard">
+  <% @teams.each do |team| %>
+    <div class="team">
+      <h2><%= team.name %></h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Message</th>
+            <th>Who?</th>
+            <th>When?</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% count = 0 %>
+          <% team.logs.order(created_at: :desc).each do |log| %>
+            <tr>
+              <td><%= log.checkpoint.message %></td>
+              <td><%= log.person.description %></td>
+              <td><%= log.created_at.to_formatted_s(:short) %></td>
+              <td>
+                <% if log.checkpoint.points > 0 %>
+                  <%= log.checkpoint.points %>
+                  <% count += log.checkpoint.points %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Total Points:</td>
+            <td><%= count %></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  <% end %>
+</section>
+

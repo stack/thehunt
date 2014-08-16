@@ -21,7 +21,7 @@ class MessagesController < ApplicationController
       elsif !person.team.started?
         response = makeResponse 'Your team has not been started. Contact the administrator for help.'
       else
-        if body =~ /\Ahelp\z/
+        if body == '?'
           response = process_help(body, person)
         else
           response = process_checkpoint(body, person)
@@ -54,6 +54,31 @@ class MessagesController < ApplicationController
   def process_checkpoint(body, person)
     # Get the team position
     position = person.team.position
+
+    # Get the next checkpoint
+    checkpoint = Checkpoint.find_by order: position + 1
+
+    # The end?
+    if checkpoint.nil?
+      return makeResponse "You're already done. Congratulations. Again."
+    end
+
+    # Did it match?
+    if /#{checkpoint.message}/ =~ body
+      # Move to the next position
+      person.team.update_attribute :position, checkpoint.order
+
+      # Log it
+      log = Log.new
+      log.checkpoint = checkpoint
+      log.person = person
+      log.team = person.team
+      log.save
+
+      return makeResponse checkpoint.success_message
+    else
+      return makeResponse 'Nope.'
+    end
   end
 
   def process_team(code)

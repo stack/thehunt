@@ -413,3 +413,33 @@ div.notice-error {
   }
 }
 
+#dashboard {
+  table {
+    thead{
+      th:nth-child(4) {
+        text-align: center;
+      }
+    }
+
+    tbody {
+      td:nth-child(4) {
+        text-align: center;
+      }
+    }
+
+    tfoot {
+      td {
+        font-weight: bold;
+
+        &:nth-child(1) {
+          text-align: right;
+        }
+
+        &:nth-child(2) {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+

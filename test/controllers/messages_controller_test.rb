@@ -62,11 +62,42 @@ class MessagesControllerTest < ActionController::TestCase
 
     checkpoint = checkpoints(:one)
 
-    post :create, { Body: "help", From: person.number }
+    post :create, { Body: '?', From: person.number }
 
     assert_response :success
     assert_match /Go to the place/, @response.body
   end
 
+  test "should send nope if the answer is wrong" do
+    team = teams(:ramrod)
+
+    person = people(:joe)
+    person.team = team
+    person.save
+
+    team.start!
+
+    post :create, { Body: 'blap', From: person.number }
+
+    assert_response :success
+    assert_match /Nope/, @response.body
+  end
+
+  test "should move to the next checkpoint if the answer is correct" do
+    team = teams(:ramrod)
+
+    person = people(:joe)
+    person.team = team
+    person.save
+
+    team.start!
+
+    post :create, { Body: 'two', From: person.number }
+
+    assert_response :success
+    assert_match /Try looking over here/, @response.body
+    assert_equal 1, Log.count
+  end
 
 end
+

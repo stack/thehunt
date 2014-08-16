@@ -2,6 +2,8 @@ class Checkpoint < ActiveRecord::Base
 
   before_validation :get_next_order, :on => :create
 
+  has_many :logs
+
   validates :message, presence: true, uniqueness: true
   validates :response, presence: true
   validates :points, numericality: { only_integer: true, greater_than_or_equal_to: 0 }

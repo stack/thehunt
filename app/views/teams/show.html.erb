@@ -38,8 +38,9 @@
     <% else %>
       <% @team.people.each do |person| %>
         <tr>
-          <td><%= person.name %></td>
           <td><%= person.number %></td>
+          <td><%= person.name %></td>
+          <td></td>
         </tr>
       <% end %>
     <% end %>

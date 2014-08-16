@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140816132534) do
+ActiveRecord::Schema.define(version: 20140816193151) do
 
   create_table "checkpoints", force: true do |t|
     t.string   "message"
@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(version: 20140816132534) do
   end
 
   add_index "checkpoints", ["message"], name: "index_checkpoints_on_message", unique: true
+
+  create_table "logs", force: true do |t|
+    t.integer  "checkpoint_id"
+    t.integer  "team_id"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "logs", ["checkpoint_id"], name: "index_logs_on_checkpoint_id"
+  add_index "logs", ["person_id"], name: "index_logs_on_person_id"
+  add_index "logs", ["team_id"], name: "index_logs_on_team_id"
 
   create_table "people", force: true do |t|
     t.string   "number"

@@ -1,5 +1,6 @@
 class Team < ActiveRecord::Base
 
+  has_many :logs
   has_many :people
 
   validates :code, presence: true, uniqueness: true
