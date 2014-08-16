@@ -18,8 +18,22 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
+  def reset
+    @team = Team.find params[:id]
+    @team.reset!
+
+    redirect_to teams_path
+  end
+
   def show
     @team = Team.find params[:id]
+  end
+
+  def start
+    @team = Team.find params[:id]
+    @team.start!
+
+    redirect_to teams_path
   end
 
   def update

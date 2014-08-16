@@ -8,7 +8,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :teams
+  resources :teams do
+    member do
+      post 'start'
+      post 'reset'
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

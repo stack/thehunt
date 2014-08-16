@@ -13,7 +13,20 @@ class MessagesController < ApplicationController
     if body =~ /team ([a-z0-9]+)/
       response = process_team($1)
     else
-      response = Twilio::TwiML::Response.new
+      # Ensure the user is authorized
+      person = Person.find_by number: params['From']
+
+      if person.nil?
+        response = makeResponse 'You must be registered to answer questions.'
+      elsif !person.team.started?
+        response = makeResponse 'Your team has not been started. Contact the administrator for help.'
+      else
+        if body =~ /\Ahelp\z/
+          response = process_help(body, person)
+        else
+          response = process_checkpoint(body, person)
+        end
+      end
     end
 
     render_twiml response
@@ -21,34 +34,49 @@ class MessagesController < ApplicationController
 
   private
 
+  def makeResponse(message)
+    return Twilio::TwiML::Response.new do |r|
+      r.Message message
+    end
+  end
+
+  def process_help(body, person)
+    # Get the team position
+    position = person.team.position
+
+    # Get the current checkpoint
+    checkpoint = Checkpoint.find_by order: position
+
+    # Send back the response
+    makeResponse checkpoint.response
+  end
+
+  def process_checkpoint(body, person)
+    # Get the team position
+    position = person.team.position
+  end
+
   def process_team(code)
     # Look for an existing user
     person = Person.find_by number: params['From']
     if !person.nil?
-      return Twilio::TwiML::Response.new do |r|
-        r.Message 'This number is already associated with a team. Contact the administrator for help.'
-      end
+      return makeResponse 'This number is already associated with a team. Contact the administrator for help.'
     end
 
     # Look for the team
     team = Team.where('lower(code) = ?', code).first
     if team.nil?
-      return Twilio::TwiML::Response.new do |r|
-        r.Message 'Could not find the team. Please try again.'
-      end
+      return makeResponse 'Could not find the team. Please try again.'
     end
 
     # Create the person
     person = team.people.build number: params['From']
     if person.save
-      return Twilio::TwiML::Response.new do |r|
-        r.Message "You have been registered on Team #{team.name}."
-      end
+      return makeResponse "You have been registered on Team #{team.name}."
     else
-      return Twilio::TwiML::Response.new do |r|
-        r.Message 'An error occurred during registration. Contact the administrator for help.'
-      end
+      return makeResponse 'An error occurred during registration. Contact the administrator for help.'
     end
   end
 
 end
+

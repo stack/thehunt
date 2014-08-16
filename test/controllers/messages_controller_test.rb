@@ -6,7 +6,7 @@ class MessagesControllerTest < ActionController::TestCase
     post :create, { Body: 'blap', From: '+15551112222' }
 
     assert_response :success
-    assert_match /\<Response\/\>/, @response.body
+    assert_match /You must be registered/, @response.body
   end
 
   test "should fail registering a user if it already exists" do
@@ -37,5 +37,36 @@ class MessagesControllerTest < ActionController::TestCase
     person = team.people.first
     assert_equal '+15551112222', person.number
   end
+
+  test "should fail response when the team hasn't started" do
+    team = teams(:ramrod)
+
+    person = people(:joe)
+    person.team = team
+    person.save
+
+    post :create, { Body: "help", From: person.number }
+
+    assert_response :success
+    assert_match /Your team has not been started/, @response.body
+  end
+
+  test "should send the current response when asking for help" do
+    team = teams(:ramrod)
+
+    person = people(:joe)
+    person.team = team
+    person.save
+
+    team.start!
+
+    checkpoint = checkpoints(:one)
+
+    post :create, { Body: "help", From: person.number }
+
+    assert_response :success
+    assert_match /Go to the place/, @response.body
+  end
+
 
 end

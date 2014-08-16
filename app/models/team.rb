@@ -6,5 +6,19 @@ class Team < ActiveRecord::Base
   validates :name, presence: true
   validates :position, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  def started?
+    self.position != 0
+  end
+
+  def start!
+    unless started?
+      self.update_attribute :position, 1
+    end
+  end
+
+  def reset!
+    self.update_attribute :position, 0
+  end
+
 end
 
