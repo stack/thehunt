@@ -1,0 +1,21 @@
+development:
+  username: admin
+  password: password
+  twilio_account_sid: A12345
+  twilio_account_token: d12345
+  twilio_number: '+15551112222'
+
+test:
+  username: admin
+  password: password
+  twilio_account_sid: A12345
+  twilio_account_token: d12345
+  twilio_number: '+15551112222'
+
+production:
+  username: admin
+  password: password
+  twilio_account_sid: A12345
+  twilio_account_token: d12345
+  twilio_number: '+15551112222'
+
