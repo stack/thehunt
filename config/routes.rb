@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
+  get 'broadcast/index'
+  post 'broadcast/send_broadcast'
+
   get 'dashboard/index'
+
   post 'messages/create'
 
   resources :checkpoints do

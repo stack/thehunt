@@ -389,6 +389,10 @@ div.flash-info {
   @extend %flash-notice;
 }
 
+div.flash-notice {
+  @extend %flash-notice;
+}
+
 div.flash-error {
   @extend %flash-error;
 }

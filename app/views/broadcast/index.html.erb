@@ -1,0 +1,10 @@
+<% title 'Broadcast' %>
+
+<%= form_tag broadcast_send_broadcast_path, method: 'post' do %>
+  <%= label_tag :id, 'Team' %>
+  <%= select_tag :id, options_for_select([[ 'All', 'all' ]] + @teams.map { |team| [ team.name, team.id ] }) %>
+  <%= label_tag :message, 'Message' %>
+  <%= text_area_tag :message %>
+  <%= submit_tag 'Send Broadcast' %>
+<% end %>
+
