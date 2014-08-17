@@ -47,9 +47,9 @@ namespace :deploy do
   after :publishing, :restart
 
   after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      execute :rake, 'cache:clear'
-    end
+    # on roles(:web), in: :groups, limit: 3, wait: 10 do
+    #   execute :rake, 'cache:clear'
+    # end
   end
 
   desc 'Check that we can access everything'

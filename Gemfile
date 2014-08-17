@@ -56,3 +56,6 @@ gem 'capistrano-rails', '~> 1.1'
 # Database
 gem 'mysql2'
 
+# Javascript
+gem 'execjs'
+gem 'therubyracer'
