@@ -1,6 +1,6 @@
 ## What?
 
-`thehunt` is a web app used to manage trivia questions via SMS. It integrates with [Twilio][twilio] to send and receive texts. You can maanage teams, set checkpoints and broadcast messages.
+`thehunt` is a web app used to manage trivia questions via SMS. It integrates with [Twilio][twilio] to send and receive texts. You can manage teams, set checkpoints and broadcast messages.
 
 ## Configuration
 
@@ -22,6 +22,7 @@ This application was written in handful of days, so there is plenty of room for 
 
 *   Authentication to the website is via HTTP Basic Auth, which isn't the best.
 *   There are only settings for one set of Checkpoints, so once you run the system once, you need to manually delete everything to start over.
+*   The Checkpoint system is a bit asinine. I wrote it late at night and I now realize is could be much simpler.
 *   The theming is basic. It uses [Bourbon][bourbon] / [Neat][neat] / [Bitters][bitters] / [Refills][refills], so it could look much better.
 
 ## Comments? Concerns?
